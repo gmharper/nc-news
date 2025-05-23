@@ -1,7 +1,10 @@
 import { useParams } from "react-router"
 import axios from "axios"
-import React,{useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router'
+
+// components
+import CommentCard from "./CommentCard"
 
 function Article () {
     const params = useParams()
@@ -34,15 +37,13 @@ function Article () {
     <div>
         <img src={articleInfo.article_img_url} />
         <h2>{articleInfo.title}</h2>
+        <Link to={'/users/'+articleInfo.author}>Posted by: {articleInfo.author}</Link>
         <p>{articleInfo.body}</p>
     </div>
     <div>
         { articleComments.map((comment) => {
             return (
-            <div className='comment-box'>
-                <p>{comment.author}</p>
-                <p>{comment.body}</p>
-            </div>
+                <CommentCard comment={comment}/>
             )
         })}
     </div>
